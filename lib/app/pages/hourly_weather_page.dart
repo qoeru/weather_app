@@ -15,7 +15,11 @@ class HourlyWeatherPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(children: [ForecastTempWidget(weather: weather)]),
+      body: Center(
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [ForecastTempWidget(weather: weather)])),
     );
   }
 }

@@ -14,8 +14,16 @@ class ForecastTempWidget extends StatelessWidget {
     return Column(
       children: [
         Image.network(iconUrl),
-        Text(weather.temperature.toString()),
+        Text(
+          '${toCelsius(weather.temperature).toString()}°C',
+          style: TextStyle(fontSize: 50),
+        ),
+        Text(weather.name),
       ],
     );
   }
+}
+
+int toCelsius(double temp) {
+  return ((temp - 273.15) ~/ 1);
 }

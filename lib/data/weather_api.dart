@@ -23,7 +23,7 @@ class WeatherApi {
     Geocoding geocoding = await getLocation(cityName);
     try {
       http.Response response = await http.get(Uri.parse(
-          'https://api.openweathermap.org/data/2.5/weather?lat=${geocoding.lat}&lon=${geocoding.lon}&appid=$openWeatherApiKey'));
+          'https://api.openweathermap.org/data/2.5/weather?lat=${geocoding.lat}&lon=${geocoding.lon}&lang=ru&appid=$openWeatherApiKey'));
       if (response.statusCode == 200) {
         return Weather.fromJson(jsonDecode(response.body.toString()));
       }
