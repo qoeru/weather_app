@@ -4,6 +4,8 @@ import 'package:weather_app/app/cubit/weather_page_cubit.dart';
 import 'package:weather_app/app/widgets/loading_widget.dart';
 import 'package:weather_app/config/theme/theme.dart';
 
+// страница с окном для поиска
+
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
 

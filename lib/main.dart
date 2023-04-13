@@ -33,6 +33,7 @@ class MainApp extends StatelessWidget {
             );
           }
           if (state is WeatherPageSuccess) {
+            // добавление страницы на экран при успешной загрузке погоды
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -41,6 +42,7 @@ class MainApp extends StatelessWidget {
             );
           }
           if (state is WeatherShowThree) {
+            // добавление страницы на экран при успешной загрузке трех погод
             Navigator.push(
               context,
               MaterialPageRoute(

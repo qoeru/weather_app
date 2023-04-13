@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:weather_app/config/theme/theme.dart';
 
+// виджет загрузки
+
 class LoadingWidget extends StatelessWidget {
   const LoadingWidget({super.key});
 

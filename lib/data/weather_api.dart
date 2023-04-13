@@ -8,6 +8,7 @@ import 'package:weather_app/domain/models/geocoding.dart';
 
 class WeatherApi {
   Future getLocation(String cityName) async {
+    //для получения координат из города
     try {
       http.Response response = await http.get(Uri.parse(
           'http://api.openweathermap.org/geo/1.0/direct?q=$cityName&limit=1&appid=$openWeatherApiKey'));
@@ -20,6 +21,7 @@ class WeatherApi {
   }
 
   Future getCurrentForecast(String cityName) async {
+    // для получения прогноза в текущий момент
     Geocoding geocoding = await getLocation(cityName);
     try {
       http.Response response = await http.get(Uri.parse(
@@ -33,6 +35,7 @@ class WeatherApi {
   }
 
   Future getThreeDaysForecast(String cityName) async {
+    // для получения прогноза за три дня
     Geocoding geocoding = await getLocation(cityName);
     try {
       http.Response response = await http.get(Uri.parse(

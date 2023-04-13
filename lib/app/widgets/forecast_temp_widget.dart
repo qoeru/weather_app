@@ -6,6 +6,8 @@ import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+// виджет с прогнозом
+
 class ForecastTempWidget extends StatelessWidget {
   const ForecastTempWidget({Key? key, required this.weather}) : super(key: key);
   final Weather weather;

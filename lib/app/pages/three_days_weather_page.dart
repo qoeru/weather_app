@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/app/widgets/forecast_temp_widget.dart';
 import 'package:weather_app/domain/models/weather.dart';
 
+// страница с прогнозом за три дня
+
 class ThreeDaysWeatherPage extends StatelessWidget {
   const ThreeDaysWeatherPage({Key? key, required this.weathers})
       : super(key: key);
