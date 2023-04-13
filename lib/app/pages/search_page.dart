@@ -1,23 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/app/cubit/weather_page_cubit.dart';
 import 'package:weather_app/app/widgets/loading_widget.dart';
 import 'package:weather_app/config/theme/theme.dart';
-import 'package:weather_app/data/weather_api.dart';
-import 'package:weather_app/domain/models/weather.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var _textController = TextEditingController();
+    var textController = TextEditingController();
 
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: AppBar(centerTitle: true, title: Text('Погода')),
+      appBar: AppBar(centerTitle: true, title: const Text('Погода')),
       body: Padding(
         padding: const EdgeInsets.all(40.0),
         child: Column(
@@ -37,7 +33,7 @@ class SearchPage extends StatelessWidget {
               return const SizedBox();
             }),
             TextFormField(
-              controller: _textController,
+              controller: textController,
               decoration: const InputDecoration(
                 label: Text('Введите название города'),
                 fillColor: AppColors.white,
@@ -59,7 +55,7 @@ class SearchPage extends StatelessWidget {
                     onPressed: () {
                       context
                           .read<WeatherPageCubit>()
-                          .getWeather(_textController.text);
+                          .getWeather(textController.text);
                     },
                     child: const Text(
                       'Поиск',

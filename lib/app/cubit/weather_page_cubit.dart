@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:weather_app/data/weather_api.dart';
 import 'package:weather_app/domain/models/weather.dart';
-import 'dart:developer';
 
 part 'weather_page_state.dart';
 

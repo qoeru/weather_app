@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/app/cubit/weather_page_cubit.dart';
-import 'package:weather_app/app/pages/three_days_weather.dart';
-import 'package:weather_app/app/widgets/loading_widget.dart';
+import 'package:weather_app/app/pages/three_days_weather_page.dart';
 import 'app/pages/search_page.dart';
 import 'app/pages/hourly_weather_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,7 +9,7 @@ import 'config/theme/theme.dart';
 void main() {
   runApp(BlocProvider<WeatherPageCubit>(
     create: (context) => WeatherPageCubit(),
-    child: MainApp(),
+    child: const MainApp(),
   ));
 }
 
@@ -33,18 +32,25 @@ class MainApp extends StatelessWidget {
               ),
             );
           }
-        },
-        builder: (context, state) {
           if (state is WeatherPageSuccess) {
-            // при правильной загрузке погоды выводится второй экран
-            return HourlyWeatherPage(weather: state.weather);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      HourlyWeatherPage(weather: state.weather)),
+            );
           }
           if (state is WeatherShowThree) {
-            // при правильной загрузке погоды выводится второй экран
-            return ThreeDaysWeather(weathers: state.weathers);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      ThreeDaysWeatherPage(weathers: state.weathers)),
+            );
           }
-          // в любом другом случае показывается главный экран
-          return SearchPage();
+        },
+        builder: (context, state) {
+          return const SearchPage();
         },
       ),
     );

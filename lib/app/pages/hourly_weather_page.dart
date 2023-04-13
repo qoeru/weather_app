@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/app/cubit/weather_page_cubit.dart';
-import 'package:weather_app/app/pages/three_days_weather.dart';
 import 'package:weather_app/app/widgets/forecast_temp_widget.dart';
 import 'package:weather_app/domain/models/weather.dart';
 
@@ -20,6 +18,7 @@ class HourlyWeatherPage extends StatelessWidget {
         leading: IconButton(
             onPressed: () {
               context.read<WeatherPageCubit>().resetWeather();
+              Navigator.of(context).pop();
             },
             icon: const Icon(Icons.arrow_back)),
         actions: [

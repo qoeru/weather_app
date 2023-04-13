@@ -8,7 +8,7 @@ class WeatherPageError extends WeatherPageState {}
 class WeatherPageLoading extends WeatherPageState {}
 
 class WeatherPageSuccess extends WeatherPageState {
-  Weather weather;
+  final Weather weather;
 
   WeatherPageSuccess({required this.weather});
 }
@@ -16,7 +16,7 @@ class WeatherPageSuccess extends WeatherPageState {
 class WeatherPageInitial extends WeatherPageState {}
 
 class WeatherShowThree extends WeatherPageState {
-  List<Weather> weathers;
+  final List<Weather> weathers;
 
   WeatherShowThree({required this.weathers});
 }
