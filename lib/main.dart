@@ -19,6 +19,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: lightTheme(),
       home: BlocConsumer<WeatherPageCubit, WeatherPageState>(
         listener: (context, state) {

@@ -12,13 +12,13 @@ class ThreeDaysWeatherPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    weathers.sort((a, b) => a.temperature
-        .compareTo(b.temperature)); // сортировка прогнозов по температуре
+    List<Weather> weathersToShow =
+        swapMinElement(weathers); // сортировка прогнозов по температуре
 
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(weathers[0].city),
+        title: Text(weathersToShow[0].city),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -30,18 +30,37 @@ class ThreeDaysWeatherPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ForecastTempWidget(weather: weathers[0]),
+            ForecastTempWidget(weather: weathersToShow[0]),
             const SizedBox(
               height: 10,
             ),
-            ForecastTempWidget(weather: weathers[1]),
+            ForecastTempWidget(weather: weathersToShow[1]),
             const SizedBox(
               height: 10,
             ),
-            ForecastTempWidget(weather: weathers[2]),
+            ForecastTempWidget(weather: weathersToShow[2]),
           ],
         ),
       ),
     );
   }
+}
+
+List<Weather> swapMinElement(List<Weather> weathers) {
+  Weather min = weathers.first;
+  int index = 0;
+
+  for (int i = 0; i < 3; i++) {
+    if (weathers[i].temperature < min.temperature) {
+      min = weathers[i];
+      index = i;
+    }
+  }
+
+  Weather tmp = weathers.first;
+
+  weathers.first = min;
+  weathers[index] = tmp;
+
+  return weathers;
 }
