@@ -19,13 +19,33 @@ class WeatherApi {
     }
   }
 
-  Future getForecast(String cityName) async {
+  Future getCurrentForecast(String cityName) async {
     Geocoding geocoding = await getLocation(cityName);
     try {
       http.Response response = await http.get(Uri.parse(
           'https://api.openweathermap.org/data/2.5/weather?lat=${geocoding.lat}&lon=${geocoding.lon}&lang=ru&appid=$openWeatherApiKey'));
       if (response.statusCode == 200) {
-        return Weather.fromJson(jsonDecode(response.body.toString()));
+        return Weather.fromCurrentJson(jsonDecode(response.body.toString()));
+      }
+    } catch (e) {
+      log('Weather issue: $e');
+    }
+  }
+
+  Future getThreeDaysForecast(String cityName) async {
+    Geocoding geocoding = await getLocation(cityName);
+    try {
+      http.Response response = await http.get(Uri.parse(
+          'https://api.openweathermap.org/data/2.5/forecast?lat=${geocoding.lat}&lon=${geocoding.lon}&lang=ru&appid=$openWeatherApiKey'));
+      if (response.statusCode == 200) {
+        List<Weather> threeDaysWeather = [];
+        for (int i = 0; i < 17; i = i + 8) {
+          Weather weather = Weather.fromFiveDaystJson(
+              jsonDecode(response.body.toString()), i);
+          weather.city = cityName;
+          threeDaysWeather.add(weather);
+        }
+        return threeDaysWeather;
       }
     } catch (e) {
       log('Weather issue: $e');

@@ -15,6 +15,9 @@ dependencies:
   http: ^0.13.5
   json_annotation: ^4.8.0
   build_runner: ^2.3.3
+  google_fonts: ^4.0.3
+  loading_animation_widget: ^1.2.0+4
+  intl: ^0.18.0
 
 dev_dependencies:
   flutter_test:

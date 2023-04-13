@@ -13,11 +13,21 @@ class WeatherPageCubit extends Cubit<WeatherPageState> {
 
   Future<void> getWeather(String cityName) async {
     try {
-      Weather weather = await weatherApi.getForecast(cityName);
+      emit(WeatherPageLoading());
+      Weather weather = await weatherApi.getCurrentForecast(cityName);
       weather.city = cityName;
       emit(WeatherPageSuccess(weather: weather));
     } catch (_) {
       emit(WeatherPageError());
     }
+  }
+
+  void resetWeather() {
+    emit(WeatherPageInitial());
+  }
+
+  Future<void> getThreeDaysWeather(String cityName) async {
+    List<Weather> weathers = await weatherApi.getThreeDaysForecast(cityName);
+    emit(WeatherShowThree(weathers: weathers));
   }
 }

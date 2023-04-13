@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:weather_app/app/cubit/weather_page_cubit.dart';
+import 'package:weather_app/config/theme/theme.dart';
 import 'package:weather_app/domain/models/weather.dart';
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ForecastTempWidget extends StatelessWidget {
   const ForecastTempWidget({Key? key, required this.weather}) : super(key: key);
@@ -10,20 +14,102 @@ class ForecastTempWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String iconUrl =
-        'https://openweathermap.org/img/wn/${weather.iconId}@2x.png';
+        'https://openweathermap.org/img/wn/${weather.iconId}@2x.png'; //url иконки погоды
+
+    initializeDateFormatting('ru',
+        ''); // инициализацирую местность для отображения даты на русском языке
+    Intl.defaultLocale = 'ru';
+    var now = DateTime.now().toLocal(); //записываю текущую дату в переменную
+    var formatter = DateFormat(
+        'EEEEE, d MMMM'); //завожу переменную для форматирования даты в стиле (ДЕНЬ НЕДЕЛИ, ЧИСЛО МЕСЯЦ) //строка, содержащая сегодняшнюю даты
     return Column(
       children: [
-        Image.network(iconUrl),
-        Text(
-          '${toCelsius(weather.temperature).toString()}°C',
-          style: TextStyle(fontSize: 50),
+        const SizedBox(
+          height: 20,
         ),
-        Text(weather.name),
+        BlocBuilder<WeatherPageCubit, WeatherPageState>(
+          builder: (context, state) {
+            if (state is WeatherShowThree) {
+              now = DateTime.parse(weather.date);
+            }
+            return Text(
+              // текущая дата
+              formatter.format(now).toUpperCase(),
+              style: const TextStyle(
+                  fontSize: 14,
+                  color: AppColors.white,
+                  fontWeight: FontWeight.bold),
+            );
+          },
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.network(iconUrl), // изображение погоды
+            Text(
+              // температура в цельсиях
+              '${toCelsius(weather.temperature)}°C',
+              style: const TextStyle(
+                  fontSize: 50,
+                  color: AppColors.white,
+                  fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+        Text(
+          // описание погоды (дождь, облачно, ясно и т.п.)
+          weather.name.toUpperCase(),
+          style: const TextStyle(
+            color: AppColors.white,
+            fontSize: 14,
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Column(
+              //скорость ветра
+              children: [
+                Text(
+                  '${weather.windSpeed} м/с',
+                  style: const TextStyle(
+                      color: AppColors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
+                ),
+                const Text(
+                  'Скорость ветра',
+                  style: TextStyle(color: AppColors.white),
+                )
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              child: Column(
+                //влажность
+                children: [
+                  Text(
+                    '${weather.humidity ~/ 1}%',
+                    style: const TextStyle(
+                        color: AppColors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  const Text(
+                    'Влажность',
+                    style: TextStyle(color: AppColors.white),
+                  )
+                ],
+              ),
+            )
+          ],
+        )
       ],
     );
   }
 }
 
 int toCelsius(double temp) {
+  // температура из JSON находится в кельвинах, нужно перевести в цельсии
   return ((temp - 273.15) ~/ 1);
 }

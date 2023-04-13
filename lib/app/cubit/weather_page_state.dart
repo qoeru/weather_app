@@ -14,3 +14,9 @@ class WeatherPageSuccess extends WeatherPageState {
 }
 
 class WeatherPageInitial extends WeatherPageState {}
+
+class WeatherShowThree extends WeatherPageState {
+  List<Weather> weathers;
+
+  WeatherShowThree({required this.weathers});
+}
