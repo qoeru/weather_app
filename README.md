@@ -33,8 +33,8 @@
 
 ### Третий экран
 - [x] Вывод информации о погоде в том же городе за три дня
-- [x] Сортировка по возрастанию температуры 
-  
+- [x] Первый элемент - с самой низкой температурой
+
 <p align="center">
-<img src="https://user-images.githubusercontent.com/66938523/231753920-f13c2799-d074-471e-b0ee-40bbb4237fe6.jpg" width="25%"/>
+<img src="https://user-images.githubusercontent.com/66938523/231760217-43261844-38c2-41b8-86a9-03cc6b817441.png" width="25%"/>
 </p>
